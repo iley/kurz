@@ -1,0 +1,3 @@
+kurz/static/jquery-*.js -linguist-vendored
+kurz/static/bootstrap/js/* -linguist-vendored
+kurz/static/bootstrap/css/* -linguist-vendored
