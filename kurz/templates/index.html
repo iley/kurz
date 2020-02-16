@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} - Welcome{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1>Welcome to Kurz!</h1>
+  <p class="lead">
+  Kurz is a link shortener for corporate networks. Use it to replace long and ugly links with short and sweet ones.<br>
+  For example you can turn <a href="http://example.com/foo/bar/baz/123412323">http://example.com/foo/bar/baz/123412323</a> into <a href="http://go/kurz">go/kurz</a>.<br>
+  Use short and memorable links in your slides, on paper and when talking to your colleagues!
+  </p>
+  <a class="btn btn-primary btn-lg" href="/edit/example" role="button">Create a link</a>
+</div>
+{% endblock %}
