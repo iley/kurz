@@ -3,5 +3,24 @@
 {% block title %} - Edit link{% endblock %}
 
 {% block content %}
-TODO
+<h1>Create or edit a short link</h1>
+<form>
+  <div class="form-group">
+    <label for="link_id">Short name</label>
+    <input type="text" class="form-control" id="link_id" placeholder="goals2020">
+  </div>
+
+  <div class="form-group">
+    <label for="url">URL</label>
+    <input type="text" class="form-control" id="url" placeholder="http://example.com/foo/bar">
+  </div>
+
+  <div class="form-group">
+    <label for="extra_owners">Additional owners</label>
+    <input type="text" class="form-control" id="extra_owners" placeholder="alice, bob" aria-describedby="extra_owners_help">
+    <small id="extra_owners_help" class="form-text text-muted">Usernames of other people who can edit this link</small>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
 {% endblock %}
