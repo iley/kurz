@@ -6,4 +6,6 @@
 <h3>
 Successfully saved link <a href="http://{{ short_domain }}/{{ link.id }}">{{ short_domain }}/{{ link.id }}</a>
 </h3>
+
+<a class="btn btn-primary btn-lg" href="{{ url_for('create') }}" role="button">Create another link</a>
 {% endblock %}

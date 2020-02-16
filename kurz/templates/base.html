@@ -8,12 +8,12 @@
   <title>Kurz{% block title %}{% endblock %}</title>
 </head>
 <body>
-  <div class="container">
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Kurz</a>
+  </nav>
 
+  <div class="container">
     <header>
-      <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Kurz</a>
-      </nav>
     </header>
 
     {% if error is defined and error != None %}
