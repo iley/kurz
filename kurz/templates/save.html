@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %} - Edit link{% endblock %}
+
+{% block content %}
+<h3>
+Successfully saved link <a href="http://{{ short_domain }}/{{ link.id }}">{{ short_domain }}/{{ link.id }}</a>
+</h3>
+{% endblock %}

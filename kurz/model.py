@@ -15,9 +15,15 @@ class Link(db.Model):
     url = db.Column(db.String, nullable=False)
     users = relationship("User", secondary=user_links)
 
+    def __repr__(self):
+        return "<Link %s>" % self.id
+
 
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.String, primary_key=True)
     is_admin = db.Column(db.Boolean, default=False, nullable=False)
     links = relationship(Link, secondary=user_links)
+
+    def __repr__(self):
+        return "<User %s>" % self.id
