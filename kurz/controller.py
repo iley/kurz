@@ -38,7 +38,6 @@ def create(link_id=""):
                 url=url,
                 error="Validation error. %s" % ex,
             )
-        # TODO: Validate link_id and url.
         link = Link.query.filter_by(id=link_id).first()
         if link is not None:
             return render_template(
@@ -54,13 +53,3 @@ def create(link_id=""):
         return render_template(
             "save.html", link=link, short_domain=app.config["KURZ_SHORT_DOMAIN"]
         )
-
-
-@app.route("/admin")
-def admin():
-    abort(404)  # Not implemented yet.
-
-
-@app.route("/user/<string:user_id>")
-def profile(user_id):
-    abort(404)  # Not implemented yet.
