@@ -53,3 +53,37 @@ def create(link_id=""):
         return render_template(
             "save.html", link=link, short_domain=app.config["KURZ_SHORT_DOMAIN"]
         )
+
+
+@app.route("/edit/<string:link_id>", methods=["GET", "POST"])
+def edit(link_id):
+    link = Link.query.filter_by(id=link_id).first()
+    if link is None:
+        abort(404)  # TODO: Add error message.
+    if request.method == "GET":
+        return render_template("edit.html", link=link)
+    else:
+        url = request.form["url"]
+        try:
+            validate_url(url)
+        except ValidationError as ex:
+            return render_template(
+                "edit.html", link=link, error="Validation error. %s" % ex
+            )
+        link.url = url
+        db.session.commit()
+        return render_template(
+            "save.html", link=link, short_domain=app.config["KURZ_SHORT_DOMAIN"]
+        )
+
+@app.route("/delete/<string:link_id>", methods=["GET", "POST"])
+def delete(link_id):
+    # TODO
+    abort(404)
+
+
+@app.route("/links")
+def links():
+    # TODO: Filter by owner.
+    links = Link.query.all()
+    return render_template("links.html", links=links)

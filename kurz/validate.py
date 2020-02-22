@@ -12,6 +12,7 @@ class ValidationError(Exception):
 
 
 LINK_RE = re.compile(r"[A-Za-z0-9_-]+")
+LINK_BLACKLIST = ("admin", "create", "edit", "user", "links")
 
 
 def validate_link_id(link_id):
@@ -22,7 +23,7 @@ def validate_link_id(link_id):
             "Link name %s contains invalid characters. " % link_id +
             "Valid characters are letters, numbers, - and _."
         )
-    if link_id in ("admin", "create", "edit", "user"):
+    if link_id in LINK_BLACKLIST:
         raise ValidationError("Link name %s not allowed" % link_id)
 
 

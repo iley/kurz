@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %} - My links{% endblock %}
+
+{% block content %}
+<h1>My links</h1>
+
+<div class="table-responsive">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" class="w-auto">
+          Short link
+        </th>
+        <th scope="col" class="mr-auto">
+          URL
+        </th>
+        <th scope="col" class="w-auto">
+          Actions
+        </th>
+      </tr>
+    </thead>
+    {% for link in links %}
+    <tr>
+      <td class="w-auto">{{ link.id }}</td>
+      <td style="overflow: hidden; text-overflow: ellipsis;">
+        <a href="{{ link.url }}">{{ link.url }}</a>
+      </td>
+      <td class="w-auto text-nowrap">
+        <a href="{{ url_for('edit', link_id=link.id) }}">edit</a>
+        <a href="{{ url_for('delete', link_id=link.id) }}" class="ml-2">delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+</div>
+{% endblock %}
