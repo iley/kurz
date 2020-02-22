@@ -5,6 +5,12 @@
 {% block content %}
 <h1>My links</h1>
 
+{% if links|length == 0 %}
+<p>
+You dont have any links yet
+</p>
+<a class="btn btn-primary btn-lg" href="{{ url_for('create') }}" role="button">Create a link</a>
+{% else %}
 <div class="table-responsive">
 
   <table class="table">
@@ -34,6 +40,7 @@
     </tr>
     {% endfor %}
   </table>
-
 </div>
+{% endif %}
+
 {% endblock %}

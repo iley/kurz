@@ -14,7 +14,8 @@ Successfully saved link <a href="{{ url_for('open', link_id=link.id) }}">{{ link
 Share short link: <input class="select-on-click" type="text" readonly value="{{ short_domain }}/{{ link.id }}">
 </p>
 <p>
-  <a href="{{ url_for('links') }}" class="btn btn-primary">My links</a>
+  <a class="btn btn-secondary" href="{{ url_for('links') }}" role="button">My links</a>
+  <a class="btn btn-primary" href="{{ url_for('create') }}" role="button">Create another link</a>
 </p>
 
 {% endblock %}
