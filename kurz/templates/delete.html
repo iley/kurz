@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} - Delete link{% endblock %}
+
+{% block content %}
+<h1>Delete link</h1>
+
+{% if done %}
+
+<div class="alert alert-success" role="alert">
+Link <b>{{ link_id }}</b> was successfully deleted
+</div>
+
+<a href="{{ url_for('links') }}" class="btn btn-primary">Back to my links</a>
+
+{% else %}
+
+<div class="alert alert-warning" role="alert">
+Are you sure you want to delete link <b>{{ link_id }}</b>?
+</div>
+
+<form method="post">
+  <input type="hidden" name="link_id" value="{{ link_id }}">
+  <button type="submit" name="cancel" value="yes" class="btn btn-secondary">Cancel</button>
+  <button type="submit" name="delete" value="yes" class="btn btn-danger">Delete</button>
+</form>
+
+{% endif %}
+
+{% endblock %}

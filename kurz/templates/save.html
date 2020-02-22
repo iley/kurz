@@ -3,10 +3,18 @@
 {% block title %} - Edit link{% endblock %}
 
 {% block content %}
-<h3>
-Successfully saved link <a href="{{ url_for('open', link_id=link.id) }}">{{ link.id }}</a>
-</h3>
 
-Share short link: <input type="text" disabled value="{{ short_domain }}/{{ link.id }}">
+<h1>Link saved</h1>
+
+<div class="alert alert-success" role="alert">
+Successfully saved link <a href="{{ url_for('open', link_id=link.id) }}">{{ link.id }}</a>
+</div>
+
+<p>
+Share short link: <input class="select-on-click" type="text" readonly value="{{ short_domain }}/{{ link.id }}">
+</p>
+<p>
+  <a href="{{ url_for('links') }}" class="btn btn-primary">My links</a>
+</p>
 
 {% endblock %}

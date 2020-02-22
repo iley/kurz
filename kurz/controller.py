@@ -26,8 +26,8 @@ def create(link_id=""):
         link = Link.query.filter_by(id=link_id).first()
         return render_template("create.html", link_id=link_id, link=link, url="")
     else:
-        link_id = request.form["link_id"]
-        url = request.form["url"]
+        link_id = request.form.get("link_id", "")
+        url = request.form.get("url", "")
         try:
             validate_link_id(link_id)
             validate_url(url)
@@ -60,10 +60,11 @@ def edit(link_id):
     link = Link.query.filter_by(id=link_id).first()
     if link is None:
         abort(404)  # TODO: Add error message.
+    # TODO: Check ownership.
     if request.method == "GET":
         return render_template("edit.html", link=link)
     else:
-        url = request.form["url"]
+        url = request.form.get("url", "")
         try:
             validate_url(url)
         except ValidationError as ex:
@@ -76,10 +77,23 @@ def edit(link_id):
             "save.html", link=link, short_domain=app.config["KURZ_SHORT_DOMAIN"]
         )
 
+
 @app.route("/delete/<string:link_id>", methods=["GET", "POST"])
 def delete(link_id):
-    # TODO
-    abort(404)
+    link = Link.query.filter_by(id=link_id).first()
+    if link is None:
+        abort(404)  # TODO: Add error message.
+    if request.method == "GET":
+        return render_template("delete.html", link_id=link_id, done=False)
+    else:
+        if request.form.get("delete", "") == "yes":
+            # TODO: Check ownership.
+            Link.query.filter_by(id=link_id).delete()
+            link = None
+            db.session.commit()
+            return render_template("delete.html", link_id=link_id, done=True)
+        else:
+            return redirect(url_for("links"))
 
 
 @app.route("/links")
