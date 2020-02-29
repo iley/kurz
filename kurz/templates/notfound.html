@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} - Link not found{% endblock %}
+
+{% block alert%}
+<div class="alert alert-danger" role="alert">
+Link {{ link_id }} not found
+</div>
+{% endblock %}
+
+{% block content %}
+
+<p>
+  <a class="btn btn-secondary" href="{{ url_for('links') }}" role="button">My links</a>
+  <a class="btn btn-primary" href="{{ url_for('create', link_id=link_id) }}" role="button">Create link</a>
+</p>
+{% endblock %}

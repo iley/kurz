@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} - Unauthorized{% endblock %}
+
+{% block alert%}
+<div class="alert alert-danger" role="alert">
+  You are not authorized to modify link {{ link.id }}
+</div>
+{% endblock %}
+
+{% block content %}
+Link {{ link.id }} is owned by following users:
+<ul>
+  {% for owner in link.owners %}
+  <li>{{ owner.id }}</li>
+  {% endfor %}
+</ul>
+Please contact an owner if you wish to edit or delete this link.
+{% endblock %}

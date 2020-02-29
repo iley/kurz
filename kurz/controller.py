@@ -1,4 +1,4 @@
-from flask import abort, render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for
 from sqlalchemy.orm import joinedload
 
 from . import app, db
@@ -75,9 +75,9 @@ def edit(link_id):
     username = current_user()
     link = Link.query.options(joinedload(Link.owners)).filter_by(id=link_id).first()
     if link is None:
-        abort(404)  # TODO: Add error message.
+        return render_template("notfound.html", link_id=link_id), 404
     if not link.owned_by(username):
-        abort(403)  # TODO: Render a nice page with error message.
+        return render_template("unauthorized.html", link=link), 403
     if request.method == "GET":
         return render_template("edit.html", link=link, username=username)
     else:
@@ -106,16 +106,15 @@ def delete(link_id):
     username = current_user()
     link = Link.query.options(joinedload(Link.owners)).filter_by(id=link_id).first()
     if link is None:
-        abort(404)  # TODO: Add error message.
+        return render_template("notfound.html", link_id=link_id), 404
     if not link.owned_by(username):
-        abort(403)  # TODO: Render a nice page with error message.
+        return render_template("unauthorized.html", link=link), 403
     if request.method == "GET":
         return render_template(
             "delete.html", link_id=link_id, done=False, username=username
         )
     else:
         if request.form.get("delete", "") == "yes":
-            # TODO: Check ownership.
             Link.query.filter_by(id=link_id).delete()
             link = None
             db.session.commit()

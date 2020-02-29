@@ -9,7 +9,7 @@ def current_user():
         if username is not None:
             g.username = username
         elif app.config["ANONYMOUS_ENABLED"]:
-            g.username = "anonymous"
+            g.username = app.config["ANONYMOUS_USERNAME"]
         else:
             abort(403)
     return g.username
