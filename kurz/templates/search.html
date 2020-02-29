@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %} - Search{% endblock %}
+
+{% block content %}
+
+<h1>Link search</h1>
+
+<form method="get" class="mt-3 mb-3">
+  <div class="form-group">
+    <label for="query">Link prefix</label>
+    <input type="text" value="{{ query }}" class="form-control" id="query" name="query" placeholder="foo">
+  </div>
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+{% if query == "" %}
+{# nothing to see here #}
+{% elif links|length == 0 %}
+<p>
+No links found
+</p>
+{% else %}
+
+{% if links|length == limit %}
+<p>
+Showing first {{ limit }} links. Refine your search to see more.
+</p>
+{% endif %}
+
+<div class="table-responsive">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" class="w-auto">
+          Short link
+        </th>
+        <th scope="col" class="mr-auto">
+          URL
+        </th>
+        <th scope="col" class="mr-auto">
+          Owners
+        </th>
+        <th scope="col" class="w-auto">
+          Actions
+        </th>
+      </tr>
+    </thead>
+    {% for link in links %}
+    <tr>
+      <td class="w-auto">{{ link.id }}</td>
+      <td style="overflow: hidden; text-overflow: ellipsis;">
+        <a href="{{ link.url }}">{{ link.url }}</a>
+      </td>
+      <td>
+        {% for owner in link.owners %}
+          {{ owner.id }}{{ ", " if not loop.last }}
+        {% endfor %}
+      </td>
+      <td class="w-auto text-nowrap">
+        <a href="{{ url_for('edit', link_id=link.id) }}">edit</a>
+        <a href="{{ url_for('delete', link_id=link.id) }}" class="ml-2">delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+
+{% endblock %}

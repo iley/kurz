@@ -128,3 +128,19 @@ def links():
     username = current_user()
     user = get_or_create_user(username)
     return render_template("links.html", links=user.links, username=username)
+
+
+@app.route("/search")
+def search():
+    limit = app.config["LINK_SEARCH_LIMIT"]
+    query = request.args.get("query", "")
+    if query == "":
+        links = []
+    else:
+        links = (
+            Link.query.filter(Link.id.like(query + "%"))
+            .options(joinedload(Link.owners))
+            .limit(limit)
+            .all()
+        )
+    return render_template("search.html", links=links, limit=limit, query=query)

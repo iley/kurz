@@ -6,8 +6,8 @@ from flask_sqlalchemy import SQLAlchemy
 from . import config
 
 app = Flask(__name__)
-# app.config.from_object(config.Defaults)
-app.config.from_object(config.Debug)
+app.config.from_object(config.Defaults)
+# app.config.from_object(config.Debug)
 config_path = os.environ.get("KURZ_CONFIG")
 if config_path:
     app.config.from_json(config_path)

@@ -4,6 +4,7 @@ class Defaults:
     USER_HEADER = "X-Forwarded-User"
     ANONYMOUS_ENABLED = False
     ANONYMOUS_USERNAME = "anonymous"
+    LINK_SEARCH_LIMIT = 100
 
 
 class Debug(Defaults):
